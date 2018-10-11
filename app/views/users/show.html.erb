@@ -1,0 +1,7 @@
+<!-- Title -->
+<% provide(:title, @user.name + " profile") %>
+
+<h1><b>User:</b> <%= @user.name %></h1>
+
+<!-- User data -->
+<%= render 'user_data' %>

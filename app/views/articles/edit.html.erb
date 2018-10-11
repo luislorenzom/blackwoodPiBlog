@@ -1,0 +1,13 @@
+<% provide(:title, "Edit " + @article.title) %>
+
+<!-- Title -->
+<h1>
+    <!-- Back button -->
+    <%= link_to article_path(@article), class: "header-button back-header-button" do %>
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    <% end %>
+    <b>Edit article:</b> <%= @article.title %>
+</h1>
+
+<!-- Article data -->
+<%= render 'form' %>

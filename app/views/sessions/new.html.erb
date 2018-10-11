@@ -1,0 +1,38 @@
+<% provide(:title, "Log in") %>
+<h1><b>Log in</b></h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+<%
+=begin
+%> 
+        <% if isLoggedIn? and user.errors.any? %>
+            <div id="error_explanation">
+                <div class="alert alert-danger">
+                The form contains <%= pluralize(user.errors.count, "error") %>.
+                </div>
+                <ul>
+                <% user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+<%
+=end
+%>
+        <%= form_for(:session, url: login_path) do |form| %>
+
+            <%= form.label :email %>
+            <%= form.email_field :email, class: 'form-control' %>
+            <br>
+            <%= form.label :password %>
+            <%= form.password_field :password, class: 'form-control' %>
+            <br>
+            <%= form.submit "Log in", class: 'form-control btn btn-primary' %>
+        <% end %>
+        <br>
+        <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
+</div>

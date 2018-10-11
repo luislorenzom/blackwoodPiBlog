@@ -1,0 +1,89 @@
+<div class="welcome-layout">
+
+    <!-- List of articles -->
+    <div class="articles-list">
+        <div class="welcome-title">
+            <h2><b>Latest articles</b></h2>
+        </div>
+
+        <% @articles.each do |article| %>
+            <div class="entry">
+                <!-- Title -->
+                <h3 class="entry-title"><%= link_to article_path article do %> 
+                <%= article.title %>
+                <% end %>
+                </h3>
+                
+                <!-- Article metada -->
+                <div class="entry-metadata">
+                    <small style="color:grey;"><%= article.created_at.strftime("%d-%b-%Y") %></small>
+                    <small><b>Author: </b><%= article.user.name %></small>
+                </div>
+                
+                <!-- Tags -->
+                <div class="entry-tags">
+                    <% article.tags.each do |tag| %>
+                        <small>
+                            <%= link_to search_path(:tag => tag.name) do %>
+                                <%= tag.name %>
+                            <% end %>
+                        </small>
+                    <% end %>
+                </div>
+
+                <!-- Text example -->
+                <div class="entry-example">
+                    <%= escape_markdown(article.text[0...200]) + "..." %>
+                </div>
+            </div>
+        <% end %>
+
+        <!-- Pagination component -->
+        <div style="float:right">
+            <%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
+        </div>
+    </div>
+
+    <!-- Special articles -->
+    <div class="special-articles">
+        <!-- Top articles -->
+        <div class="welcome-title">
+            <h2>
+                <b>Top articles</b>
+                <span class="glyphicon glyphicon-fire small"></span>
+            </h2>
+        </div>
+        <div class="special-article">
+            <% @top_articles.each do |article| %>
+                <%= link_to article_path(article) do %>
+                    <div class="special-article-title">
+                        <%= article.title %>
+                    </div>
+                    <div class="entry-example">
+                        <%= escape_markdown(article.text[0...100]) + "..." %>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+
+        <!-- Fixed articles -->
+        <div class="welcome-title">
+            <h2>
+                <b>Fixed articles</b>
+                <span class="glyphicon glyphicon-pushpin small"></span>
+            </h2>
+        </div>
+        <div class="special-article">
+            <% @fixed_articles.each do |article| %>
+                <%= link_to article_path(article) do %>
+                    <div class="special-article-title">
+                        <%= article.title %>
+                    </div>
+                    <div class="entry-example">
+                        <%= escape_markdown(article.text[0...100]) + "..." %>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>

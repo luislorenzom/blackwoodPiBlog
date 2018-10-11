@@ -1,0 +1,20 @@
+<h2>Personal data</h2>
+<b>Name</b>:
+<%= @user.name %>
+<br>
+<b>Email</b>:
+<%= @user.email %>
+
+<h2>Articles List</h2>
+<% @user.articles.each do |article| %>
+    <ul>
+        <li><%= article.title %></li>
+    </ul>
+<%end%>
+
+<h2>Comments List</h2>
+<% @user.comments.each do |comment| %>
+    <ul>
+        <li><%= comment.body %> at <%= comment.article.title %></li>
+    </ul>
+<%end%>

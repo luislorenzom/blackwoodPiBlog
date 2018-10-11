@@ -1,0 +1,88 @@
+<% provide(:title, @article.title) %>
+
+<!-- Title -->
+  <h1>
+    <b><%= @article.title %></b>
+      <!-- Header buttons -->
+      <% if isLoggedIn? and policy(@article).update? %>
+        
+        <!-- Delete or not publish message -->
+        <% if @article.enabled %>
+          <%= link_to edit_article_path(@article), class: "header-button delete-header-button" do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <% end %>
+        <% else %>
+          <span class="not-publish">NOT PUBLISHED</span>
+        <% end %>
+        
+        <!-- Edit -->
+        <%= link_to edit_article_path(@article), class: "header-button edit-header-button" do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+        
+
+      <% end %>
+  </h1>
+
+<!-- Article data -->
+<div style="margin-bottom:10px">
+  <small style="color:grey;">
+    <%= @article.created_at.strftime("%d-%b-%Y") %>
+  </small>
+  <br>
+  <small>
+    <b>Autor: </b> <%= @article.user.name %>
+  </small>
+</div>
+
+<!-- Text content -->
+<div class="break-line">
+    <%= markdown(@article.text) %>
+</div>
+
+<!-- Tags -->
+<h2>Tags:</h2>
+<div class="tag-list">
+  <% @article.tags.each do |tag| %>
+      <small>
+          <%= link_to search_path(:tag => tag.name) do %>
+              <%= tag.name %>
+          <% end %>
+      </small>
+  <% end %>
+</div>
+
+<!-- Comments -->
+<h2>Comments:</h2>
+<div style="margin-left: 20px">
+  <% @comments.each do |comment| %> 
+    <p>
+      <strong><%= comment.user.name %> at </strong><small><%= comment.created_at.strftime("%d/%m/%Y - %H:%M:%S") %></small>
+      <%= link_to article_comment_path(@article, comment), 
+                  method: :delete,
+                  class: "delete-comment",
+                  data: {confirm: 'Are you sure?'} do %>
+        <span class="glyphicon glyphicon-remove"></span>
+      <% end %>
+      <br>
+      <div class="break-line">
+        <%= comment.body %> 
+      </div>
+    </p>
+  <% end %>
+</div>
+
+<!-- Add comment form -->
+<% if isLoggedIn? %>
+  <h2>Add a comment:</h2>
+  <%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
+    <p>
+      <%= form.text_area :body %>
+    </p>
+    <p>
+      <%= form.submit 'Send your comment', class: 'btn btn-success'%>
+    </p>
+  <% end %>
+  <br>
+<% end %>
+

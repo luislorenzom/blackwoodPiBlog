@@ -1,0 +1,30 @@
+
+<h2><%= @articles.count %> Articles Found</h2>
+
+<% @articles.each do |article| %>
+    <div class="entry found">
+        <!-- Title -->
+        <h3 class="entry-title"><%= link_to article_path article do %> 
+           <%= article.title %>
+           <% end %>
+        </h3>
+        
+        <!-- Article metada -->
+        <div class="entry-metadata">
+            <small style="color:grey;"><%= article.created_at.strftime("%d-%b-%Y") %></small>
+            <small><b>Author: </b><%= article.user.name %></small>
+        </div>
+        
+        <!-- Tags -->
+        <div class="entry-tags">
+            <% article.tags.each do |tag| %>
+                <small><%= tag.name %></small>
+            <% end %>
+        </div>
+
+        <!-- Text example -->
+        <div class="entry-example">
+            <%= escape_markdown(article.text[0...200]) + "..." %>
+        </div>
+    </div>
+<% end %>
