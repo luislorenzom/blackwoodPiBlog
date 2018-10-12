@@ -23,12 +23,10 @@ Finally you can run the blog
 # TODO List
 
 * gemfile.lock security vulvenaryvilty
-* Improve search system
 * Model's policies
   * at controllers
   * at views
-* Stylesheet
-  * Footer 
+* Stylesheet 
   * Logo
   * Article details
 * Profile and user details links to articles
