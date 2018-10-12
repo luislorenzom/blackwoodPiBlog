@@ -2,11 +2,13 @@
     <nav class="navbar navbar-fixed-top navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
+                <!-- Collapsabe button -->
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapsable">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span> 
                 </button>
+                <!-- Logo -->
                 <%= link_to  '/', id: "logo",class: 'navbar-brand' do%>
                     <span>Blackwood PInes</span>
                     <span class="glyphicon glyphicon-tree-conifer"></span>
@@ -27,6 +29,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Admin Panel
+                            <span class="glyphicon glyphicon-cog"></span>
                             <span class="glyphicon glyphicon-menu-down"></span>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -38,10 +41,20 @@
                 <% end %>
                 <!-- Files list -->
                 <% if isLoggedIn? %>
-                    <li><%= link_to "Files",   '#' %></li>
+                    <li>
+                        <%= link_to  '#' do %>
+                            <span>Files</span>
+                            <span class="glyphicon glyphicon-folder-open"></span>
+                        <% end %>
+                    </li>
                 <% end %>
                 <!-- Help -->
-                <li><%= link_to "Help",   '#' %></li>
+                <li>
+                    <%= link_to '#' do%>
+                        <span>Help</span>
+                        <span class="glyphicon glyphicon-question-sign"></span>
+                    <%end%>
+                </li>
                 <!-- Login -->
                 <% if current_user.nil? %>
                     <li><%= link_to 'Login', controller: 'sessions', action: 'new' %></li>

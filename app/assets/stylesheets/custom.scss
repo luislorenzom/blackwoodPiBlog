@@ -275,6 +275,7 @@ li.search-container input {
 
 button.search-button {
   vertical-align: baseline;
+  padding-top: 8px;
 }
 
 .welcome-layout {
@@ -339,25 +340,42 @@ button.search-button {
 }
 
 .footer-first-line {
-  font-weight: bold;
-  font-size: 15px;
+  display: inline;
 }
 
 .footer-first-line .copyright {
   float: left;
 }
 
-.footer-first-line .links a {
+.footer-first-line .links {
   float: right;
-  color: #ffffff;
-  margin-left: 10px;
 }
 
-.footer-first-line .links a:hover {
-  color: #337ab7;
+.footer-first-line a, .footer-second-line a {
+  color:  #9d9d9d;
+}
+
+.footer-first-line a:hover,  .footer-second-line a:hover{
+  color: #ffffff;
   text-decoration: none;
 }
 
+.footer-first-line .links a {
+  margin-right: 10px;
+}
+
+
 .footer-second-line {
   text-align: center;
+}
+
+@media (max-width: 556px) {
+  .footer-first-line {
+    display: contents;
+    text-align: center;
+  }
+
+  footer {
+    height: 75px;
+  }
 }

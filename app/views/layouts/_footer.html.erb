@@ -1,20 +1,42 @@
 <footer>
+
+  <!-- Footer's first line -->
   <div class="footer-first-line">
     <!-- Copyright disclaimer -->
     <div class="copyright">
-      luislorenzom. All rights reserved (<%= Date.today.year %>).
+      <%= link_to '#' do %>
+        <span>luislorenzom</span>
+      <% end %>.
+      All rights reserved (<%= Date.today.year %>)
     </div>
 
-    <!-- Footer's links -->
+    <!-- Links -->
     <div class="links">
-      <%= link_to "Code repository", 'https://github.com/luislorenzom' %>
-      <%= link_to "Contribute", '#' %>
-      <%= link_to "Email", 'mailto:luislorenzomosquera@gmail.com' %>
+      <!-- Repository -->
+      <%= link_to 'https://github.com/luislorenzom' do %>
+        <span class="glyphicon glyphicon-cloud-upload"></span>
+        <span>Code repository</span>
+      <% end %>
+      
+      <!-- Contribute -->
+      <%= link_to '#' do %>
+        <span class="glyphicon glyphicon-piggy-bank"></span>
+        <span>Contribute</span>
+      <% end %>
+
+      <!-- Email-->
+      <%= link_to 'mailto:luislorenzomosquera@gmail.com' do %>
+        <span class="glyphicon glyphicon-envelope"></span>
+        <span>Email</span>
+      <% end %>
     </div>
   </div>
 
   <!-- footer's second line-->
   <div class="footer-second-line">
-    <p>Powered by <a href="https://rubyonrails.org/"><b>Ruby on Rails</b></a> and <a href="https://www.raspberrypi.org/"><b>RaspberryPi</b></a></p>
+    <span>
+      Powered by <a href="https://rubyonrails.org/"><b>Ruby on Rails</b></a> and <a href="https://www.raspberrypi.org/"><b>RaspberryPi</b></a>
+    </span>
   </div>
+
 </footer>
