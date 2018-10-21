@@ -1,7 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/* universal */
+/* -------------- */
+/* UNIVERSAL      */
+/* -------------- */
 body {
     padding-top: 60px;
 }
@@ -28,34 +30,44 @@ textarea {
   height: 35px;
 }
 
-/* typography */
+.break-line {
+  word-break: break-all;
+}
 
+.invisible {
+  display: none;
+}
+
+/* -------------- */
+/* TYPOGRAPHY     */
+/* -------------- */
 h1, h2, h3, h4, h5, h6 {
-    line-height: 1;
-  }
+  line-height: 1;
+}
   
-  h1 {
-    font-size: 3em;
-    letter-spacing: -2px;
-    margin-bottom: 30px;
-    text-align: center;
-  }
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
   
-  h2 {
-    font-size: 1.2em;
-    letter-spacing: -1px;
-    margin-bottom: 7px;
-    font-weight: normal;
-    color: #777;
-  }
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 7px;
+  font-weight: normal;
+  color: #777;
+}
   
-  p {
-    font-size: 1.1em;
-    line-height: 1.7em;
-  }
-/* ****** */
-/* Footer */
-/* ****** */
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* -------------- */
+/* FOOTER         */
+/* -------------- */
 html {
   position: relative;
   min-height: 100%;
@@ -78,9 +90,38 @@ footer {
   display: grid;
 }
 
-/* **** */
-/* Logo */
-/* **** */
+.footer-first-line {
+  display: inline;
+}
+
+.footer-first-line .copyright {
+  float: left;
+}
+
+.footer-first-line .links {
+  float: right;
+}
+
+.footer-first-line a, .footer-second-line a {
+  color:  #9d9d9d;
+}
+
+.footer-first-line a:hover,  .footer-second-line a:hover{
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer-first-line .links a {
+  margin-right: 10px;
+}
+
+.footer-second-line {
+  text-align: center;
+}
+
+/* -------------- */
+/* LOGO           */
+/* -------------- */
 #logo {
     color: #ffffff;
     font-size: 15px;
@@ -94,7 +135,9 @@ footer {
     text-decoration: none;
 }
 
-/* Feedback panel */
+/* -------------- */
+/* FEEDBACK PANEL */
+/* -------------- */
 #error_explanation {
   color: red;
   ul {
@@ -103,9 +146,9 @@ footer {
   }
 }
 
-/* ******* */
-/* Entries */
-/* ******* */
+/* -------------- */
+/* ENTRIES        */
+/* -------------- */
 .entry {
   margin-top: 35px;
   margin-bottom: 35px;
@@ -164,10 +207,9 @@ footer {
   text-decoration: none;
 }
 
-/* ************** */
-/* HEADER BUTTONS */
-/* ************** */
-
+/* --------------- */
+/* HEADER ELEMENTS */
+/* --------------- */
 .header-button {
   font-size: 26px;
 }
@@ -177,7 +219,7 @@ footer {
   opacity: 0.8;
 }
 
-/* Edit button */
+/* EDIT BUTTON */
 .edit-header-button {
   color: #f0ad4e;
 }
@@ -186,7 +228,7 @@ footer {
   color: #f0ad4e;
 }
 
-/* Back button */
+/* BACK BUTTON */
 .back-header-button {
   color: #337ab7;
   vertical-align: middle;
@@ -196,7 +238,7 @@ footer {
   color: #337ab7;
 }
 
-/* Delete button */
+/* DELETE BUTTON */
 .delete-header-button {
   color: #d9534f;
 }
@@ -205,7 +247,7 @@ footer {
   color: #d9534f;
 }
 
-/* Not pusblish message */
+/* NOT PUBLISH MESSAGE */
 span.not-publish {
   background-color: red;
   color: white;
@@ -217,10 +259,11 @@ span.not-publish {
   font-weight: bold;
 }
 
-.break-line {
-  word-break: break-all;
-}
+/* ------------------ */
+/* SHOW PAGE ELEMENTS */
+/* ------------------ */
 
+/* DELETE COMMENT BUTTON */
 a.delete-comment {
   color: red;
   font-size: 12px;
@@ -230,6 +273,14 @@ a.delete-comment:hover {
   text-decoration: none;
 }
 
+.red-color-delete-comment {
+  color: #fb5555;
+}
+.red-color-delete-comment:hover {
+  color: #f70000;
+}
+
+/* TAG LIST */
 .tag-list {
   margin-left: 20px;
 }
@@ -257,6 +308,29 @@ a.delete-comment:hover {
   text-decoration: none;
 }
 
+/* ADD COMMENT */
+.add-comment {
+  display: inline-flex;
+}
+
+button.send-comment {
+  margin-left: 8px;
+}
+
+/* LIKE BUTTON */
+.heart {
+  color: #fb5555;
+  font-size: 30px;
+  vertical-align: middle;
+}
+
+.heart:hover {
+  color: #f70000;
+}
+
+/* ------------------ */
+/* SEARCH PAGE        */
+/* ------------------ */
 .found .entry-example {
   margin-right: 50%;
 }
@@ -278,6 +352,9 @@ button.search-button {
   padding-top: 8px;
 }
 
+/* ------------------- */
+/* WELCOME PAGE        */
+/* ------------------- */
 .welcome-layout {
   display: flex;
 }
@@ -304,28 +381,6 @@ button.search-button {
   font-size: 18px;
 }
 
-@media (max-width: 847px) {
-  li.search-container {
-    display: none;
-  }
-
-  #logo {
-    font-size: 25px;
-    padding-top: 9px;
-  }
-}
-
-@media (max-width: 991px) {
-  .special-articles {
-    display: none;
-  }
-
-  .articles-list {
-    margin-right: unset;
-    width: unset;
-  }
-}
-
 .special-article a {
   color: #333333; 
 }
@@ -339,36 +394,68 @@ button.search-button {
   padding-bottom: 5px;
 }
 
-.footer-first-line {
-  display: inline;
+span.top-like-indicator {
+  font-size: 70%;
+  color: #333333;
 }
 
-.footer-first-line .copyright {
-  float: left;
+/* ----------------- */
+/* NEW AND EDIT PAGE */
+/* ----------------- */
+#categories {
+  margin-top: 10px;
+  margin-bottom: 7px;
 }
 
-.footer-first-line .links {
-  float: right;
-}
-
-.footer-first-line a, .footer-second-line a {
-  color:  #9d9d9d;
-}
-
-.footer-first-line a:hover,  .footer-second-line a:hover{
+#categories span.tag {
+  background: #337ab7;
   color: #ffffff;
-  text-decoration: none;
+  padding-left: 9px;
+  padding-right: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-right: 5px;
 }
 
-.footer-first-line .links a {
-  margin-right: 10px;
+.delete-tag {
+  color: white;
+  padding-left: 7px;
+  vertical-align: text-top;
 }
 
-
-.footer-second-line {
-  text-align: center;
+.delete-tag:hover {
+  color: red;
 }
 
+/* -------------- */
+/* SUGGESTIONS    */
+/* -------------- */
+#suggestions {
+  border: solid thin #7777774f;
+  padding: 5px;
+  margin-top: -1px;
+  color: #000000;
+  display: grid;
+}
+
+.suggestion {
+  color: #000000;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
+
+.suggestion:hover {
+  color: #ffffff;
+  background-color: #777;
+  text-decoration: none; 
+}
+
+/* ------------------- */
+/* RESPOSIVE DESING    */
+/* ------------------- */
+
+/* FOOTER */
 @media (max-width: 556px) {
   .footer-first-line {
     display: contents;
@@ -377,5 +464,29 @@ button.search-button {
 
   footer {
     height: 75px;
+  }
+}
+
+/* WELCOME PAGE */
+@media (max-width: 991px) {
+  .special-articles {
+    display: none;
+  }
+
+  .articles-list {
+    margin-right: unset;
+    width: unset;
+  }
+}
+
+/* HEADER */
+@media (max-width: 847px) {
+  li.search-container {
+    display: none;
+  }
+
+  #logo {
+    font-size: 25px;
+    padding-top: 9px;
   }
 }

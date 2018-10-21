@@ -2,6 +2,8 @@ class User < ModelWithStatus
 
     before_save { self.email = email.downcase }
 
+    scope :username, -> (name) { where("users.name LIKE (?)", "%#{name}%")}
+
     # Validations
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
@@ -18,6 +20,9 @@ class User < ModelWithStatus
     has_many :comments
     has_many :articles
     has_many :roles, through: :assignments
+
+    has_many :likes
+    has_many :articles_loved, through: :likes, :source => :article
 
     # Check if the users has the received role
     def role?(role)

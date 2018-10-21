@@ -11,9 +11,18 @@
   <body>
     <!-- header -->
     <%= render 'layouts/header' %>
-
+    
     <!-- content -->
     <div class="container">
+      <!-- Global feedback panel -->
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %> alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <%= message %>
+        </div>
+      <% end %>
+      
+      <!-- Content -->
       <%= yield %>
     </div>
 

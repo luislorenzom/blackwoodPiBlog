@@ -3,7 +3,9 @@ module ApplicationHelper
     require 'redcarpet'
     require 'redcarpet/render_strip'
 
+    # ------------------------------------------------------------
     # Returns the full title on a per-page basis.
+    # ------------------------------------------------------------
     def full_title(page_title = '')
         base_title = "Blackwood PInes"
         if page_title.empty?
@@ -13,12 +15,16 @@ module ApplicationHelper
         end
     end
 
+    # ------------------------------------------------------------
     # Checks if the user is logged in
+    # ------------------------------------------------------------
     def isLoggedIn?
       !current_user.nil?
     end
     
+    # ------------------------------------------------------------
     # Checks if the user has admin role
+    # ------------------------------------------------------------
     def isAdmin?
       if current_user.nil?
         false
@@ -27,6 +33,9 @@ module ApplicationHelper
       end
     end
 
+    # ------------------------------------------------------------
+    # Turns a text with Markdown tokens to HTML format
+    # ------------------------------------------------------------
     def markdown(text)
       options = {
         filter_html:     true,
@@ -48,6 +57,9 @@ module ApplicationHelper
       markdown.render(text).html_safe
     end
 
+    # ------------------------------------------------------------
+    # Escapes the Markdown tokens to gets the plain text
+    # ------------------------------------------------------------
     def escape_markdown(text)
       md = Redcarpet::Markdown.new(Redcarpet::Render::StripDown, :space_after_headers => false)
       md.render(text)

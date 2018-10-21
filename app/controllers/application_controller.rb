@@ -5,7 +5,10 @@ class ApplicationController < ActionController::Base
     include SessionsHelper
     include Pundit
 
-    private 
+    private
+        # ------------------------------------------------------------
+        # Actions to not authorized users
+        # ------------------------------------------------------------
         def user_not_authorized
             #flash[:alert] = "You are not cool enough to do this - go back from whence you came."
             redirect_to root_path

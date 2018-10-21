@@ -15,3 +15,10 @@ Assignment.create([
     {user: users.first, role: roles.first}, 
     {user: users.second, role: roles.second}
 ])
+
+# Tags
+tags = Tag.create([
+    {name: 'tutorial'},
+    {name: 'fixed'},
+    {name: 'info'}
+])

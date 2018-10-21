@@ -5,7 +5,7 @@ class CommentPolicy < ApplicationPolicy
     end
 
     def destroy?
-        (user.role? :admin) or (user.id == record.user.id)
+        !user.nil? and ((user.role? :admin) or (user.id == record.user.id))
     end
 
 end

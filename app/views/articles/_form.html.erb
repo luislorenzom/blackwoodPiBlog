@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="margin-bottom: 30px;">
   <div class="col-md-6 col-md-offset-3">
         <%= form_with(model: @article, local: true) do |form| %>
             
@@ -28,12 +28,19 @@
                 <%= form.label :text %><br>
                 <%= form.text_area :text, class: 'form-control', rows: "17" %>
             </p>
+            
 
             <!-- Tags -->
-            <p>
-                <%= form.label :tags %>
-                <%= text_field_tag 'tags', @tags, class: 'form-control', 'data-role'=>'tagsinput' %>
-            </p>
+            <div>
+                <b><%= form.label :tags %></b>
+                <div id="master_div">
+                        <div id="input_autocomplete">
+                            <input id="tag-input" autocomplete="off" type="text" value="" class="form-control"/>
+                        </div>
+                        <div id="categories"></div>
+                </div>
+                <%= text_field_tag 'tags', @tags, class: 'form-control invisible', 'data-role'=>'tagsinput' %>
+            </div>
 
             <!-- Published checkbox -->
             <p>

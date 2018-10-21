@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   resources :articles do
     put '/revive',    to: 'articles#revive'
     resources :comments
+      # ---------------
+      # Likes
+      # ---------------
+      post '/like',       to: 'likes#like'
+      delete '/dislike',     to: 'likes#dislike'
   end
   
   # ---------------
@@ -40,5 +45,4 @@ Rails.application.routes.draw do
   # Search
   # ---------------
   get '/search',      to: 'search#index'
-
 end

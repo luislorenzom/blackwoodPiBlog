@@ -1,5 +1,8 @@
 class TagsController < ApplicationController
 
+    # ------------------------------------------------------------
+    # Searches all the tags which match with the query received
+    # ------------------------------------------------------------
     def index
         @query = params[:q]
         if @query.nil?

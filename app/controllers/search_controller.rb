@@ -1,15 +1,17 @@
 class SearchController < ApplicationController
 
+    # ------------------------------------------------------------
+    # Search articles by several criterias:
+    # q => token which appears into the article's body or title
+    # tag => articles's tag
+    # author => author's name
+    # ------------------------------------------------------------
     def index
         @articles = Article.where(nil)
 
-        if params[:q].present? && params[:tag].present?
-            @articles = Article.title(params[:q]).or(Article.text(params[:q])).tagged_with_tag(params[:tag])
-        elsif params[:q].present?
-            @articles = Article.title(params[:q]).or(Article.text(params[:q]))
-        elsif params[:tag].present?
-            @articles = Article.tagged_with_tag(params[:tag])
-        end
+        @articles = @articles.creator(params[:author]) if params[:author].present?
+        @articles = @articles.title(params[:q]).or(@articles.text(params[:q])) if params[:q].present?
+        @articles = @articles.tagged_with_tag(params[:tag]) if params[:tag].present?
     end
 
 end

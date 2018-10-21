@@ -1,19 +1,23 @@
 class ArticlePolicy < ApplicationPolicy
-    
+
     def create?
-        user.role? :admin
+        (!user.nil?) && (user.role? :admin)
+    end
+
+    def edit?
+        !user.nil? && ((user.role? :admin) || (@record.user.id == user.id))
     end
 
     def update?
-        user.role? :admin
+        !user.nil? && ((user.role? :admin) || (@record.user.id == user.id))
     end
 
     def destroy?
-        user.role? :admin
+        !user.nil? && ((user.role? :admin) || (@record.user.id == user.id))
     end
     
     def revive?
-        user.role? :admin
+        !user.nil? && ((user.role? :admin) || (@record.user.id == user.id))
     end
     
 end

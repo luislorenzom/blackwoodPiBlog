@@ -17,7 +17,12 @@
                 <!-- Article metada -->
                 <div class="entry-metadata">
                     <small style="color:grey;"><%= article.created_at.strftime("%d-%b-%Y") %></small>
-                    <small><b>Author: </b><%= article.user.name %></small>
+                    <small>
+                        <b>Author: </b>
+                        <%= link_to search_path(:author => article.user.name) do %>
+                            <%= article.user.name %>
+                        <% end %>
+                    </small>
                 </div>
                 
                 <!-- Tags -->
@@ -58,6 +63,11 @@
                 <%= link_to article_path(article) do %>
                     <div class="special-article-title">
                         <%= article.title %>
+                        <span class="top-like-indicator">
+                            <span>with</span>
+                            <%= @likes_per_article[article.id] %>
+                            <span class="glyphicon glyphicon-heart" style="color: red"></span>
+                        </span>
                     </div>
                     <div class="entry-example">
                         <%= escape_markdown(article.text[0...100]) + "..." %>

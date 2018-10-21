@@ -22,17 +22,12 @@ Finally you can run the blog
 
 # TODO List
 
-* gemfile.lock security vulvenaryvilty
-* Model's policies
-  * at controllers
-  * at views
+* gemfile.lock security vulnerability
 * Stylesheet 
   * Logo
-  * Article details
 * Profile and user details links to articles
 * Generalize feedback panel for the differents forms
 * Improve login page
-  * Add feedback panel
   * "Remember me" checkbox
   * Mail validation? now users should be enabled in the login process
 * Add ssl certificate
@@ -41,12 +36,7 @@ Finally you can run the blog
   * Start/Stop required services
   * Show server's info
 * Likes articles
-  * Create model's relation
-  * Add link button
-  * show favourites articles people's profile
-* Add code to manage special article within welcome page
-  * fixed articles
-  * top articles
+  * Show favourites articles into profile
 * Statics pages
   * Help
   * How to contribute
@@ -55,4 +45,7 @@ Finally you can run the blog
   * Desing and implement model
   * Controller
   * View
-* Recommend other article in articles details page
+* Add markdown editor to write article's text
+* Do the test
+* tag cloud format => (tag_name|number_of_articles)
+* Show how many likes has each article

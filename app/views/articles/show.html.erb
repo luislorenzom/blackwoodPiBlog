@@ -1,88 +1,143 @@
 <% provide(:title, @article.title) %>
+<%= javascript_include_tag :articles %>
 
-<!-- Title -->
-  <h1>
-    <b><%= @article.title %></b>
-      <!-- Header buttons -->
-      <% if isLoggedIn? and policy(@article).update? %>
-        
-        <!-- Delete or not publish message -->
-        <% if @article.enabled %>
-          <%= link_to edit_article_path(@article), class: "header-button delete-header-button" do %>
-            <span class="glyphicon glyphicon-trash"></span>
-          <% end %>
-        <% else %>
-          <span class="not-publish">NOT PUBLISHED</span>
-        <% end %>
-        
-        <!-- Edit -->
-        <%= link_to edit_article_path(@article), class: "header-button edit-header-button" do %>
-          <span class="glyphicon glyphicon-pencil"></span>
-        <% end %>
-        
+<div class="welcome-layout">
 
-      <% end %>
-  </h1>
+  <!-- Article -->
+  <div class="articles-list">
+    <!-- Title -->
+    <div class="welcome-title">
+        <h2>
+            <b><%= @article.title %></b>
 
-<!-- Article data -->
-<div style="margin-bottom:10px">
-  <small style="color:grey;">
-    <%= @article.created_at.strftime("%d-%b-%Y") %>
-  </small>
-  <br>
-  <small>
-    <b>Autor: </b> <%= @article.user.name %>
-  </small>
-</div>
-
-<!-- Text content -->
-<div class="break-line">
-    <%= markdown(@article.text) %>
-</div>
-
-<!-- Tags -->
-<h2>Tags:</h2>
-<div class="tag-list">
-  <% @article.tags.each do |tag| %>
+            <!-- Header buttons -->
+            <% if isLoggedIn? and policy(@article).update? %>
+          
+              <!-- Delete or not publish message -->
+              <% if @article.enabled %>
+                <%= link_to article_path(@article),
+                            class:"header-button delete-header-button",
+                            method: :delete,
+                            data: {confirm: 'Are you sure?'} do %>
+                    <span class="glyphicon glyphicon-trash"></span>
+                <% end %>
+              <% else %>
+                <span class="not-publish">NOT PUBLISHED</span>
+              <% end %>
+          
+              <!-- Edit -->
+              <%= link_to edit_article_path(@article), class: "header-button edit-header-button" do %>
+                <span class="glyphicon glyphicon-pencil"></span>
+              <% end %>
+            <% end %>
+        </h2>
+    </div>
+    <br>
+    <!-- Article data -->
+    <div style="margin-bottom:10px">
+      <small style="color:grey;">
+        <%= @article.created_at.strftime("%d-%b-%Y") %>
+      </small>
+      <br>
       <small>
-          <%= link_to search_path(:tag => tag.name) do %>
-              <%= tag.name %>
+          <b>Author: </b>
+          <%= link_to search_path(:author => @article.user.name) do %>
+              <%= @article.user.name %>
           <% end %>
       </small>
-  <% end %>
-</div>
+    </div>
 
-<!-- Comments -->
-<h2>Comments:</h2>
-<div style="margin-left: 20px">
-  <% @comments.each do |comment| %> 
-    <p>
-      <strong><%= comment.user.name %> at </strong><small><%= comment.created_at.strftime("%d/%m/%Y - %H:%M:%S") %></small>
-      <%= link_to article_comment_path(@article, comment), 
-                  method: :delete,
-                  class: "delete-comment",
-                  data: {confirm: 'Are you sure?'} do %>
-        <span class="glyphicon glyphicon-remove"></span>
+    <!-- Text content -->
+    <div class="break-line">
+        <%= markdown(@article.text) %>
+    </div>
+
+    <!-- Like/Dislike button -->
+    <% if isLoggedIn? and policy(@article).update? %>
+      <h2>
+        Do you want to support this article?
+        <% if !current_user.articles_loved.include?(@article) %>
+          <%= link_to article_like_path(@article), class: 'like', method: :post, remote: true, data: { toggle_href: article_dislike_path(@article), toggle_method: 'delete' } do %>
+            <span class="glyphicon glyphicon-heart-empty heart"></span>
+          <% end %>
+        <% else %>
+          <%= link_to article_dislike_path(@article), class: 'like', method: :delete, remote: true, data: { toggle_href: article_like_path(@article), toggle_method: 'post' } do %>
+            <span class="glyphicon glyphicon-heart heart"></span>
+          <% end %>
+        <% end %>
+      </h2>
+    <% end %>
+
+    <!-- Tags -->
+    <h2>Tags:</h2>
+    <div class="tag-list">
+      <% @article.tags.each do |tag| %>
+          <small>
+              <%= link_to search_path(:tag => tag.name) do %>
+                  <%= tag.name %>
+              <% end %>
+          </small>
       <% end %>
-      <br>
-      <div class="break-line">
-        <%= comment.body %> 
-      </div>
-    </p>
-  <% end %>
+    </div>
+
+    <!-- Add comment form -->
+    <% if isLoggedIn? %>
+      <h2>Add a comment:</h2>
+      <%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
+        <div class="add-comment">
+          <%= form.text_area :body, cols: 24 %>
+
+          <%= button_tag(type: 'submit', class: "btn btn-success send-comment") do %>
+            <span class="glyphicon glyphicon-send"></span> 
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <!-- Comments -->
+    <h2>Comments:</h2>
+    <div style="margin-left: 20px">
+      <% @comments.each do |comment| %> 
+        <p>
+          <strong><%= comment.user.name %> at </strong><small><%= comment.created_at.strftime("%d/%m/%Y - %H:%M:%S") %></small>
+          <% if policy(comment).destroy? %>
+            <%= link_to article_comment_path(@article, comment), 
+                        method: :delete,
+                        class: "delete-comment",
+                        data: {confirm: 'Are you sure?'} do %>
+              <span class="glyphicon glyphicon-remove red-color-delete-comment"></span>
+            <% end %>
+          <% end %>
+          <br>
+          <div class="break-line">
+            <%= comment.body %> 
+          </div>
+        </p>
+      <% end %>
+    </div>
+    <br>
+  </div>
+
+  <!-- Recommendations -->
+  <div class="special-articles">
+    <div class="welcome-title" style="font-size: 30px">
+        <h2>
+            <b>Similar articles</b>
+            <span class="glyphicon glyphicon-thumbs-up" style="vertical-align: top;"></span>
+        </h2>
+    </div>
+    <div class="special-article">
+        <% @similar_articles.each do |article| %>
+            <%= link_to article_path(article) do %>
+                <div class="special-article-title">
+                    <%= article.title %>
+                </div>
+                <div class="entry-example">
+                    <%= escape_markdown(article.text[0...100]) + "..." %>
+                </div>
+            <% end %>
+        <% end %>
+    </div>  
+  </div>
+
 </div>
-
-<!-- Add comment form -->
-<% if isLoggedIn? %>
-  <h2>Add a comment:</h2>
-  <%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
-    <p>
-      <%= form.text_area :body %>
-    </p>
-    <p>
-      <%= form.submit 'Send your comment', class: 'btn btn-success'%>
-    </p>
-  <% end %>
-  <br>
-<% end %>
-
