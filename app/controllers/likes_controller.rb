@@ -10,6 +10,8 @@ class LikesController < ApplicationController
     def like
         @article = Article.find(params[:article_id])
         current_user.articles_loved.append(@article)
+        # Article.find(6).likes.count()
+        # render json: "asd"
     end
 
     # ------------------------------------------------------------
@@ -24,7 +26,7 @@ class LikesController < ApplicationController
 
     private
         def logged_user?
-            unless logged_in?
+            if logged_in?
                 redirect_to root_path
             end
         end
